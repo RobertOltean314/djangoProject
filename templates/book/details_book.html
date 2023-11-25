@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Book Details {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card" style="height: 400px;"> {# Set a fixed height for the card #}
+                    <div class="row" style="height: 100%;"> {# Set a fixed height for the row #}
+                        <div class="col-md-4" style="height: 100%;"> {# Set a fixed height for the column #}
+                            <div class="card-header" style="height: 100%;">
+                                {% if book.cover_image %}
+                                    <img src="{{ book.cover_image.url }}" class="img-fluid" alt="book-cover"
+                                         style="height: 100%;">
+                                {% else %}
+                                    <img src="{% static 'images/not_found.png' %}" class="img-fluid" alt="default-img"
+                                         style="height: 100%;">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-8" style="height: 100%;"> {# Set a fixed height for the column #}
+                            <div class="card-body text-center" style="height: 100%;">
+                                <h5>{{ book.title }} {{ book.author }}</h5>
+                                <h6>{{ book.genre }} {{ book.release_year }}</h6>
+                                <p>{{ book.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

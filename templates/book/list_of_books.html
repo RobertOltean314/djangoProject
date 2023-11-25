@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} List of Books {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for book in all_books %}
+                <div class="col-md-2">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            {% if book.cover_image %}
+                                <img src="{{ book.cover_image.url }}" class="card-img-top book-cover" alt="profile"
+                                     height="400">
+                            {% else %}
+                                <img src="{% static 'images/not_found.png' %}" class="card-img-top book-cover"
+                                     alt="default-img" width="50">
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">{{ book.title }}</h5>
+                            <h6 class="card-subtitle text-center">{{ book.author }}</h6>
+                            <p class="text-center">{{ book.genre }} {{ book.release_year }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="dropdown">
+                                <button class="btn btn-success dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    More actions
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'update-books' book.id %}">Update</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'delete-books' book.id %}">Delete</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'details-book' book.id %}">View
+                                        Details</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

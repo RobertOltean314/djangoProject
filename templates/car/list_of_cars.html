@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} List of Cars {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for car in all_cars %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if car.image %}
+                                <img src="{{ car.image.url }}" class="card-img-top" alt="image" height="300">
+                            {% else %}
+                                <img src="{% static 'images/not_found.png' %}" class="card-img-top" alt="default-image"
+                                     height="300">
+                            {% endif %}
+                            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                            <h6 class="card-subtitle">{{ car.year }}</h6>
+                            <p class="text">{{ car.color }}</p>
+                            <p class="text">{{ car.horse_power }}</p>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    More actions
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'update-car' car.id %}">Update</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'delete-car' car.id %}">Delete</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'details-car' car.id %}">View Details</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

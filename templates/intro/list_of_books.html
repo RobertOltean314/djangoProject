@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}List of books{% endblock %}
+
+{% block content %}
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Release Year</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for book in all_books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.release_year }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'list_of_cars' %}">Go to list of books</a>
+{% endblock %}

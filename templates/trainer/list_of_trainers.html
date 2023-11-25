@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} List of trainers {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            {% for trainer in all_trainers %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class=" card-body">
+                            {% if trainer.profile %}
+                                <img src="{{ trainer.profile.url }}" class="card-img-top" alt="profile" height="250">
+                            {% else %}
+                                <img src="{% static 'images/default_trainer_img.png' %}" class="card-img-top"
+                                     alt="default-img"
+                                     height="250">
+                            {% endif %}
+                            <h5 class="card-title">{{ trainer.first_name }} {{ trainer.last_name }}</h5>
+                            <p class="card-text">Course: {{ trainer.course }}</p>
+                            <p class="card-text">Email: {{ trainer.email }}</p>
+                            <p class="card-text">Department: {{ trainer.get_department_display }}</p>
+                            <p class="card-text">Active: {% if trainer.active %}Yes{% else %}No{% endif %}</p>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    More Actions
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'update-trainer' trainer.id %}">Update</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{% url 'delete-trainer' trainer.id %}">Delete</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{% url 'details-trainer' trainer.id %}">View Details</a>
+                                    </li>
+                                    {% if trainer.active is False %}
+                                        <li><a class="dropdown-item" href="{% url 'activate-trainer' trainer.id %}">Activate</a>
+                                        </li>
+                                    {% else %}
+                                        <li><a class="dropdown-item" href="{% url 'inactivate-trainer' trainer.id %}">Inactivate</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

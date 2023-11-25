@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Car Details {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card" style="width:1200px">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card-header">
+                                {% if car.image %}
+                                    <img src="{{ car.image.url }}" class="img-fluid" alt="car-image">
+                                {% else %}
+                                    <img src="{% static 'images/not_found.png' %}" class="img-fluid" alt="default-img">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5>{{ car.brand }} {{ car.model }}</h5>
+                                <h6>{{ car.year }} model with {{ car.horse_power }} horse power</h6>
+                                <p>{{ car.technical_specifications }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

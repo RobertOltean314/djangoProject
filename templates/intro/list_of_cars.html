@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} List of cars {% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10">
+                <table class="table table-info table-striped">
+                    <thead>
+                    <tr>
+                        <th>Name of brand</th>
+                        <th>Color</th>
+                        <th>Year</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for car in all_cars %}
+                        {#                {% if car.year == 2022 %}#}
+                        <tr>
+                            <td>{{ car.brand }}</td>
+                            <td>{{ car.color }}</td>
+                            <td>{{ car.year }}</td>
+                        </tr>
+                        {#                {% endif %}#}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-danger" href="{% url 'list_of_books' %}">Go to list of books</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

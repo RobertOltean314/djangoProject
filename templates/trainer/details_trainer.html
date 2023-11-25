@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Trainer Details{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card text-center">
+                    <div class="card-header">
+                        {% if trainer.profile %}
+                            <img src="{{ trainer.profile.url }}" class="rounder text-center" width="100" height="100"
+                                 alt="Profile pic">
+                        {% else %}
+                            <img src="{% static 'images/default_trainer_img.png' %}" class="rounded text-center"
+                                 width="100"
+                                 height="100" alt="Profile pic">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ trainer.first_name }} {{ trainer.last_name }}</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ trainer.course }}</li>
+                        <li class="list-group-item">{{ trainer.department }}</li>
+                        <li class="list-group-item">{{ trainer.email }}</li>
+                    </ul>
+                    <div class="card-footer text-body-secondary">
+                        Created at: {{ trainer.created_at|date:'d-m-Y H:i:s' }} / Updated
+                        at: {{ trainer.updated_at|date:"d-m-Y H:i:s" }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
